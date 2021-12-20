@@ -1,4 +1,4 @@
-import { Controller as PlantController } from 'plants/controller';
+import { Controller as PlantController } from './plants/controller';
 
 const plantController = new PlantController({
 	plantRepository: {
