@@ -1,19 +1,10 @@
 import { serve } from "https://deno.land/std@0.118.0/http/server.ts";
 
-interface CreateServerDependencies {
-  configuration: {
-    port: number;
-  };
-}
+const listener = Deno.listen({ port: 8080 });
+const server = serve(listener);
 
-export async function createServer(dependencies: CreateServerDependencies) {
-  const server = serve();
+console.log(`Server running at https://localhost:${PORT}`);
 
-  console.log(
-    `Server running at https://localhost:${dependencies.configuration.port}`,
-  );
-
-  for await (let req of server) {
-    req.respond({ body: "plants api", status: 200 });
-  }
+for await (let req of server) {
+  req.respond({ body: "museums api", status: 200 });
 }
