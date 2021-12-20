@@ -1,9 +1,12 @@
-import { Controller as PlantController } from './plants/controller';
+import {
+  Controller as PlantController,
+  Repository as PlantRepository,
+} from "./plants/index";
+
+const plantRepository = new PlantRepository();
 
 const plantController = new PlantController({
-	plantRepository: {
-		getAll: async () => []
-	}
+  plantRepository,
 });
 
-console.log(await plantController.getAll())
+console.log(await plantController.getAll());
