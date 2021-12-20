@@ -1,7 +1,15 @@
-import { PlantController } from "./types";
-
+import type { PlantRepository, PlantController } from "./types";
+interface ControllerDependencies {
+	plantRepository: PlantRepository 
+}
 export class Controller implements PlantController {
+	plantRepository: PlantRepository
+
+	constructor({ plantRepository: plantRepository }: ControllerDependencies) {
+		this.plantRepository = plantRepository 
+	}
+
 	async getAll() {
-		return [];
+		return this.plantRepository.getAll();
 	}
 }

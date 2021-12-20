@@ -9,3 +9,7 @@ export type Plant = {
 export interface PlantController {
     getAll: () => Promise<Plant[]>;
 }
+
+export interface PlantRepository {
+    getAll: () => Promise<Plant[]>
+}
