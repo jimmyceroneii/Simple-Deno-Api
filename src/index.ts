@@ -2,6 +2,7 @@ import {
   Controller as PlantController,
   Repository as PlantRepository,
 } from "./plants/index.ts";
+import { createServer } from "./web/index.ts";
 
 const plantRepository = new PlantRepository();
 
@@ -16,3 +17,5 @@ plantRepository.storage.set("longkey", {
 });
 
 console.log(await plantController.getAll());
+
+createServer({ configuration: { port: 8080 } });
