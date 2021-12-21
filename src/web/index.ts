@@ -1,20 +1,22 @@
-import { Server } from "https://deno.land/std@0.118.0/http/server.ts";
+import { Server } from "../deps.ts";
+import type { PlantController } from "../plants/index.ts";
 
 interface CreateServerDependencies {
   configuration: {
     port: number;
   };
+  plants: PlantController;
 }
 
 export const createServer = async (config: CreateServerDependencies) => {
-  const handler = (request: Request) => {
+  const handler = async (request: Request) => {
     console.log("RequestURL: ", request.url);
     if (
       request.url ===
         `http://localhost:${config.configuration.port}/api/plants` &&
       request.method === "GET"
     ) {
-      const body = JSON.stringify({ plants: [] });
+      const body = JSON.stringify({ plants: await config.plants.getAll() });
 
       return new Response(body, { status: 200 });
     } else {

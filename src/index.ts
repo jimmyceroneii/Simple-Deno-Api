@@ -18,4 +18,4 @@ plantRepository.storage.set("longkey", {
 
 console.log(await plantController.getAll());
 
-createServer({ configuration: { port: 8080 } });
+createServer({ configuration: { port: 8080 }, plants: plantController });

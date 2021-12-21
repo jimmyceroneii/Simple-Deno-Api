@@ -1,4 +1,4 @@
-import { Plant, PlantRepository } from "./index.ts";
+import type { Plant, PlantRepository } from "./index.ts";
 
 export class Repository implements PlantRepository {
   storage = new Map<string, Plant>();
