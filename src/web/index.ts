@@ -48,12 +48,29 @@ export const createServer = async (config: CreateServerDependencies) => {
     }
 
     try {
-      const createdUser = config.user.register({ username, password });
+      const createdUser = await config.user.register({ username, password });
       ctx.response.status = 201;
       ctx.response.body = { user: createdUser };
     } catch (e) {
       ctx.response.status = 400;
       ctx.response.body = { message: e.message };
+    }
+  });
+
+  apiRouter.post("/login", async (ctx) => {
+    const { username, password } = await ctx.request.body().value;
+
+    try {
+      const { user: loginUser } = await config.user.login({
+        username,
+        password,
+      });
+
+      ctx.response.body = { user: loginUser };
+      ctx.response.status = 201;
+    } catch (e) {
+      ctx.response.body = { message: e.message };
+      ctx.response.status = 400;
     }
   });
 
